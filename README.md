@@ -32,7 +32,9 @@ We could verify the data upload completed sucessfully at Kibana dashboard.
 # Lambda
 
 Sign in to AWS console and create a Lambda, choose Java 8 to create Lambda function.
-Create a spring boot starter project using spring.initializer, to create a java handler.
+Create a spring boot starter project using spring.initializer, to create a java handler. 
+Which internally makes call to elastic search endpoint based on parameters in the request e.g. sponsorName, sponsorState
+and planName.
 
 As part of the maven dependencies in pom.xml, include the artifactId (that is, aws-lambda-java-core) is the AWS Lambda core library that provides definitions of the RequestHandler, RequestStreamHandler, and the Context AWS Lambda interfaces for use in your Java application. At the build time Maven resolves these dependencies.
 
@@ -46,3 +48,27 @@ You upload the deployment package(.jar or .zip) to S3 bucket and provide the pat
 
 # API Gateway
 
+Before creating an GET api which invokes our Lambda function. In order for your API to invoke your Lambda function, you'll need to have an API Gateway assumable IAM role, which is an IAM role with the trusted relationship. 
+The role you create will need to have Lambda InvokeFunction permission. Otherwise, the API caller will receive a 500 Internal Server Error response.
+Create the IAM role and enter the role ARN for the lambda_invoke_function_assume_apigw_role role you created for the lambda function.
+
+Now proceed with creating the API, In the API Gateway console, choose Create API and set the Endpoint Type set to Regional.
+Create a GET method that passes query string parameters(sponsorName, sponsorState and planName) to the Lambda function, you enable the API to be invoked from a browser.
+
+As part of setting up the GET method, in Integration Request set up the mapping template to translate the client-supplied query strings to the integration request payload as required by the Lambda function.
+
+The three query string parameters(sponsorName, sponsorState and planName) declared in Method Request into designated property values of the JSON object as the input to the backend Lambda function. The transformed JSON object will be included as the integration request payload.
+
+# End-to-End Test
+
+To retrieve data based on Plan Name, pass the value for planName query parameter: planName=GF & SP RETIREMENT PLAN TRUST
+
+https://nzrteq0ayl.execute-api.us-east-1.amazonaws.com/dev/personalCapitalSearch?planName=GF%20&%20SP%20RETIREMENT%20PLAN%20TRUST
+
+To retrieve data based on Sponsor Name, pass the value for sponsorName query parameter: sponsorName=SMOKY MOUNTAIN FOOD SERVICES, INC
+
+https://nzrteq0ayl.execute-api.us-east-1.amazonaws.com/dev/personalCapitalSearch?sponsorName=SMOKY%20MOUNTAIN%20FOOD%20SERVICES,%20INC
+
+To retrieve data based on Sponsor State, pass the value for sponsorState query parameter: sponsorState=TX
+
+https://nzrteq0ayl.execute-api.us-east-1.amazonaws.com/dev/personalCapitalSearch?sponsorState=TX
