@@ -23,7 +23,7 @@ Elasticsearch uses a REST API, numerous methods exist for indexing documents. Yo
 
 # To upload a JSON file that contains multiple documents to an Amazon ES domain
 
-curl -XPOST http://search-personal-capital-cgujz27zdiz6vvxs37mnyub5vq.us-east-1.es.amazonaws.com/personal-capital/_bulk?pretty --data-binary @42.json -H 'Content-Type: application/json'
+curl -XPOST http://search-XXX-XXXXXXXXXXXXXXXXXXX.us-XXX.es.amazonaws.com/personal-capital/_bulk?pretty --data-binary @42.json -H 'Content-Type: application/json'
 
 Note: While uploading the json file at one request you cannot upload more than 10MB data. So split your massive json file into multiple smaller json files. Every Json file needs to be terminated by a new line [\n].
 
