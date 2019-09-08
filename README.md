@@ -3,8 +3,7 @@ A micro service that invokes AWS elastic search and make it available using API 
 
 # Service Architecture
 
-
-
+![AWS Serverless Image Moderation Chatbot](https://user-images.githubusercontent.com/28723926/64492320-9eb91d00-d227-11e9-8ab4-6150f68699d3.jpeg)
 
 # Implementation
 
