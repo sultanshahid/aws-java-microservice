@@ -4,6 +4,7 @@ A micro service that invokes AWS elastic search and make it available using API 
 Service Architecture
 
 https://www.lucidchart.com/invitations/accept/8e514819-bf26-4e35-9844-e4822fba4a7d
+![alt text](https://www.lucidchart.com/invitations/accept/8e514819-bf26-4e35-9844-e4822fba4a7d)
 
 
 Implementation
